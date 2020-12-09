@@ -10,6 +10,9 @@ import Vant from 'vant'
 import 'vant/lib/index.css'
 import '@/assets/less/index.less'
 
+// global components
+import VComponents from '@/constants/vcomponents'
+
 import App from './App.vue'
 import router from './router'
 import store from './store'
@@ -26,6 +29,8 @@ if ('addEventListener' in document && 'ontouchstart' in window) {
 }
 
 Vue.use(Vant)
+// 常用自定义组件全量引入使用
+Vue.use(VComponents)
 
 import * as filters from './filters'
 
@@ -33,6 +38,16 @@ import * as filters from './filters'
 Object.keys(filters).forEach((key) => {
   Vue.filter(key, filters[key])
 })
+
+// 跳转
+Vue.prototype.$navigateTo = function (url, json) {
+  router.push({path: url, query: json})
+}
+
+// 返回
+Vue.prototype.$navigateBack = function (url, json) {
+  router.back()
+}
 
 Vue.config.productionTip = false
 

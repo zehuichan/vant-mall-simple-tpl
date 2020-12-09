@@ -4,7 +4,27 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-const routes = []
+// https://webpack.js.org/guides/dependency-management/#requirecontext
+const modulesFiles = require.context('./modules', true, /\.js$/)
+
+// you do not need `import app from './modules/app'`
+// it will auto require all vuex module from modules file
+const modules = modulesFiles.keys().reduce((modules, modulePath) => {
+  const value = modulesFiles(modulePath).default
+  modules.push(...value)
+  return modules
+}, [])
+
+const routes = [
+  {path: '/', redirect: 'home'},
+  {path: '/403', component: () => import('@/views/error-page/403')},
+  {path: '/404', component: () => import('@/views/error-page/404')},
+  {path: '/500', component: () => import('@/views/error-page/500')},
+
+  ...modules,
+
+  {path: '*', redirect: '/404'}
+]
 
 Vue.use(VueRouter)
 
