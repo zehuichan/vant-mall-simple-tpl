@@ -16,7 +16,7 @@ const modules = modulesFiles.keys().reduce((modules, modulePath) => {
 }, [])
 
 const routes = [
-  {path: '/', redirect: 'home'},
+  {path: '/', redirect: '/home'},
   {path: '/403', component: () => import('@/views/error-page/403')},
   {path: '/404', component: () => import('@/views/error-page/404')},
   {path: '/500', component: () => import('@/views/error-page/500')},

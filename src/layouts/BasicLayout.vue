@@ -3,18 +3,26 @@
     <!--app-main-->
     <app-main/>
     <!--tabbar-->
-    <van-tabbar v-model="active" fixed placeholder>
-      <van-tabbar-item name="home" to="/home">
-        <i slot="icon" class="iconfont icon-shouye"></i>
-        {{$t('navbar.home')}}
+    <van-tabbar route active-color="#24292e" inactive-color="#6a737d" fixed placeholder>
+      <van-tabbar-item name="home" replace to="/home">
+        <svg-icon slot="icon" name="icon-home"/>
+        首页
       </van-tabbar-item>
-      <van-tabbar-item name="message" to="/message">
-        <i slot="icon" class="iconfont icon-xiaoxi"></i>
-        {{$t('navbar.message')}}
+      <van-tabbar-item name="category" replace to="/category">
+        <svg-icon slot="icon" name="icon-category"/>
+        分类
       </van-tabbar-item>
-      <van-tabbar-item name="me" to="/me">
-        <i slot="icon" class="iconfont icon-wode"></i>
-        {{$t('navbar.me')}}
+      <van-tabbar-item name="news" replace to="/news">
+        <svg-icon slot="icon" name="icon-vehivles"/>
+        发现
+      </van-tabbar-item>
+      <van-tabbar-item name="cart" badge="5" replace to="/cart">
+        <svg-icon slot="icon" name="icon-Newuserzone"/>
+        购物袋
+      </van-tabbar-item>
+      <van-tabbar-item name="mine" replace to="/mine">
+        <svg-icon slot="icon" name="icon-account"/>
+        我的
       </van-tabbar-item>
     </van-tabbar>
   </div>
@@ -26,16 +34,6 @@
 
   export default {
     name: 'basic-layout',
-    computed: {
-      active: {
-        get() {
-          return this.$route.name
-        },
-        set(val) {
-
-        }
-      },
-    },
     components: {
       AppMain
     }
@@ -43,10 +41,21 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="less" rel="stylesheet/less" type="text/less">
+<style lang="less">
   .app-wrapper {
     position: relative;
     height: 100%;
+  }
+
+  .van-tabbar-item {
+    .van-info {
+      right: 4px;
+      margin-top: 8px;
+    }
+  }
+
+  .van-tabbar-item--active {
+    font-weight: 500;
   }
 
   .van-tabbar-item__icon {

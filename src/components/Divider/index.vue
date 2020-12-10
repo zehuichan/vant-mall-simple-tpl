@@ -34,7 +34,7 @@
 
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="less" rel="stylesheet/less" type="text/less" scoped>
+<style lang="less" scoped>
   .divider {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;

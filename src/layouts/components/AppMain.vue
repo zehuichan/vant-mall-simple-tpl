@@ -1,9 +1,9 @@
 <template>
   <div class="app-main" ref="$main">
     <keep-alive>
-      <router-view v-if="$route.meta.keepAlive" :key="key"/>
+      <router-view v-if="keepAlive" :key="key"/>
     </keep-alive>
-    <router-view v-if="!$route.meta.keepAlive" :key="key"/>
+    <router-view v-if="!keepAlive" :key="key"/>
   </div>
 </template>
 
@@ -14,13 +14,16 @@
       key() {
         return this.$route.path
       },
+      keepAlive() {
+        return this.$route.meta.keepAlive
+      }
     },
   }
 </script>
 
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="less" rel="stylesheet/less" type="text/less">
+<style lang="less">
   .app-main {
     position: relative;
     -webkit-overflow-scrolling: touch;
