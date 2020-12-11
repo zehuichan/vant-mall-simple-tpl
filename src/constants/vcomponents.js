@@ -1,8 +1,10 @@
 // components
 import SvgIcon from '@/components/SvgIcon'
+import VRecommend from '@/components/VRecommend'
 
 const components = [
   SvgIcon,
+  VRecommend,
 ]
 
 function plugin(Vue, opt) {
