@@ -8,6 +8,7 @@
     <banner/>
     <!--专题楼层-->
     <floor/>
+    <floor/>
     <!--本周热卖-->
     <v-recommend title="本周热卖" layout="vertical" :data="hot"/>
     <!--最近浏览-->
@@ -43,7 +44,11 @@
           { goods_name: 'goods name', img: '', origin_price: 79900, price: 79900, discount: '', newest: false },
           { goods_name: 'goods name', img: '', origin_price: 79900, price: 79900, discount: '', newest: false },
         ]
-        this.history = []
+        this.history = [
+          { goods_name: 'goods name', img: '', origin_price: 199900, price: 199900, discount: '', newest: false },
+          { goods_name: 'goods name', img: '', origin_price: 79900, price: 79900, discount: '', newest: false },
+          { goods_name: 'goods name', img: '', origin_price: 101900, price: 101900, discount: '', newest: false },
+        ]
       },
     },
     components: {
@@ -57,4 +62,7 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less">
+  .home {
+    padding-bottom: 10px;
+  }
 </style>
