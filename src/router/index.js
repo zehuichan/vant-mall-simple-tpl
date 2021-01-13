@@ -1,45 +1,53 @@
-// require('login/index').default   // 同步的方式
-// () => import('login/index')      // 异步的方式
+import {createRouter, createWebHashHistory} from 'vue-router'
 
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+// basic components no-unused-vars
+import BasicLayout from '@/layouts/BasicLayout'
 
-// https://webpack.js.org/guides/dependency-management/#requirecontext
-const modulesFiles = require.context('./modules', true, /\.js$/)
-
-// you do not need `import app from './modules/app'`
-// it will auto require all vuex module from modules file
-const modules = modulesFiles.keys().reduce((modules, modulePath) => {
-  const value = modulesFiles(modulePath).default
-  modules.push(...value)
-  return modules
-}, [])
 
 const routes = [
-  {path: '/', redirect: '/home'},
-  {path: '/403', component: () => import('@/views/error-page/403')},
-  {path: '/404', component: () => import('@/views/error-page/404')},
-  {path: '/500', component: () => import('@/views/error-page/500')},
-
-  ...modules,
-
-  {path: '*', redirect: '/404'}
+  { path: '/', redirect: '/home' },
+  {
+    path: '/',
+    component: BasicLayout,
+    children: [
+      // tabs
+      {
+        path: '/home',
+        name: 'home',
+        component: () => import('@/views/tabs/home/home'),
+        meta: { title: '首页' }
+      },
+      {
+        path: '/category',
+        name: 'category',
+        component: () => import('@/views/tabs/category/category'),
+        meta: { title: '分类' }
+      },
+      {
+        path: '/news',
+        name: 'news',
+        component: () => import('@/views/tabs/news/news'),
+        meta: { title: '分类' }
+      },
+      {
+        path: '/cart',
+        name: 'cart',
+        component: () => import('@/views/tabs/cart/cart'),
+        meta: { title: '分类' }
+      },
+      {
+        path: '/mine',
+        name: 'mine',
+        component: () => import('@/views/tabs/mine/mine'),
+        meta: { title: '我的' }
+      },
+    ]
+  }
 ]
 
-Vue.use(VueRouter)
-
-const createRouter = () => new VueRouter({
-  // mode: 'history', // require service support
-  scrollBehavior: () => ({y: 0}),
-  routes: routes
+const router = createRouter({
+  history: createWebHashHistory(),
+  routes
 })
-
-const router = createRouter()
-
-// Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
-export function resetRouter() {
-  const newRouter = createRouter()
-  router.matcher = newRouter.matcher // reset router
-}
 
 export default router

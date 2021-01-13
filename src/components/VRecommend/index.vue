@@ -11,7 +11,7 @@
           <div class="tag discount" v-if="item.discount">{{item.discount}}</div>
         </div>
         <div class="name">{{item.goods_name + index}}</div>
-        <div class="price">{{item.price | moneyFilter}}</div>
+        <div class="price">{{$filters.moneyFilter(item.price)}}</div>
       </div>
     </div>
   </div>
@@ -95,5 +95,4 @@
       overflow-y: auto;
     }
   }
-
 </style>

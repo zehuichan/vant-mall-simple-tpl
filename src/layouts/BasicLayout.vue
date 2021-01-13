@@ -3,25 +3,35 @@
     <!--app-main-->
     <app-main/>
     <!--tabbar-->
-    <van-tabbar route active-color="#24292e" inactive-color="#6a737d" fixed placeholder>
+    <van-tabbar route fixed placeholder active-color="#24292e" inactive-color="#6a737d">
       <van-tabbar-item name="home" replace to="/home">
-        <svg-icon slot="icon" name="icon-home"/>
+        <template #icon>
+          <svg-icon name="icon-home"/>
+        </template>
         首页
       </van-tabbar-item>
       <van-tabbar-item name="category" replace to="/category">
-        <svg-icon slot="icon" name="icon-category"/>
+        <template #icon>
+          <svg-icon name="icon-category"/>
+        </template>
         分类
       </van-tabbar-item>
       <van-tabbar-item name="news" replace to="/news">
-        <svg-icon slot="icon" name="icon-vehivles"/>
+        <template #icon>
+          <svg-icon name="icon-vehivles"/>
+        </template>
         发现
       </van-tabbar-item>
       <van-tabbar-item name="cart" badge="5" replace to="/cart">
-        <svg-icon slot="icon" name="icon-Newuserzone"/>
+        <template #icon>
+          <svg-icon name="icon-Newuserzone"/>
+        </template>
         购物袋
       </van-tabbar-item>
       <van-tabbar-item name="mine" replace to="/mine">
-        <svg-icon slot="icon" name="icon-account"/>
+        <template #icon>
+          <svg-icon name="icon-account"/>
+        </template>
         我的
       </van-tabbar-item>
     </van-tabbar>

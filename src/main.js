@@ -4,7 +4,7 @@ import 'regenerator-runtime/runtime'
 
 import '@vant/touch-emulator'
 
-import Vue from 'vue'
+import {createApp} from 'vue'
 
 import Vant from 'vant'
 import 'vant/lib/index.css'
@@ -28,31 +28,25 @@ if ('addEventListener' in document && 'ontouchstart' in window) {
   }, false)
 }
 
-Vue.use(Vant)
-// 常用自定义组件全量引入使用
-Vue.use(VComponents)
-
 import * as filters from './filters'
+
+const $filters = {}
 
 // register global utility filters.
 Object.keys(filters).forEach((key) => {
-  Vue.filter(key, filters[key])
+  $filters[key] = filters[key]
 })
 
-// 跳转
-Vue.prototype.$navigateTo = function (url, json) {
-  router.push({path: url, query: json})
-}
+const app = createApp(App)
 
-// 返回
-Vue.prototype.$navigateBack = function (url, json) {
-  router.back()
-}
+app.config.globalProperties.$filters = $filters
 
-Vue.config.productionTip = false
+console.log('app', app)
+console.log('vue', `v${app.version}`)
+console.log('vant', `v${Vant.version}`)
 
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app')
+app.use(Vant)
+app.use(VComponents)
+app.use(store)
+app.use(router)
+app.mount('#app')
